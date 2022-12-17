@@ -1,6 +1,5 @@
 const express = require("express");
 const Joi = require("joi");
-const { result } = require("underscore");
 const { join } = require("path");
 const app = express();
 app.use(express.json());
@@ -72,6 +71,11 @@ app.put("/courses/:id", function (req, res) {
       //
     }
   });
+  app.delete("/courses/:id", function (req, res){
+    var courseId = req.params.id;
+      let courseindex = courses.findIndex((c) => c.id === parseInt(courseId));
+      res.send(courses.splice(courseindex,1)); 
+  })
   
 
 app.listen(3000);
